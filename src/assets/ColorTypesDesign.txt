@@ -1,0 +1,81 @@
+# PALETA DE CORES — CAFÉ KWAI • TONS TERROSOS E CAFÉ
+
+Uma seleção de tonalidades inspiradas na sofisticação dos grãos de café, madeira nobre e ambientes aconchegantes.
+A paleta transmite elegância, conforto e identidade artesanal, equilibrando profundidade, calor e modernidade.
+
+---
+
+### 1. #7F5734 — Café Torrado
+
+**BACKGROUND**
+
+Descrição:
+Um marrom quente e encorpado que remete aos tons naturais dos grãos recém-torrados. Ideal para fundos sofisticados e atmosferas acolhedoras.
+
+---
+
+### 2. #471B01 — Espresso Intenso
+
+**PRIMARY_BROWN**
+
+Descrição:
+Marrom profundo e marcante, inspirado na intensidade de um espresso forte. Representa elegância, força visual e personalidade premium.
+
+---
+
+### 3. #5F3416 — Canela Amadeirada
+
+**SECONDARY_BROWN**
+
+Descrição:
+Tom terroso equilibrado com nuances amadeiradas e quentes. Excelente para composições refinadas e elementos de apoio visual.
+
+---
+
+### 4. #D1975D — Caramelo Cremoso
+
+**BACKGROUND_BUTTON**
+
+Descrição:
+Uma tonalidade dourada suave inspirada em caramelo e espuma de café. Cria destaque elegante para botões e elementos interativos.
+
+---
+
+### 5. #F0AF7B — Latte Aveludado
+
+**TEXT_TITLE**
+
+Descrição:
+Tom claro e acolhedor que adiciona leveza e contraste sofisticado. Ideal para títulos, detalhes e elementos de destaque visual.
+
+---
+
+### 6. #0C1016 — Noir Profundo
+
+**DARK**
+
+Descrição:
+Preto azulado extremamente sofisticado, remetendo a ambientes modernos e minimalistas. Traz profundidade e contraste premium.
+
+---
+
+### 7. #FFFFFF — Branco Porcelana
+
+**WHITE**
+
+Descrição:
+Branco puro e limpo, utilizado para equilíbrio visual, clareza e elegância em interfaces contemporâneas.
+
+---
+
+## Sugestão de Uso
+
+Esta paleta é ideal para:
+
+* Interfaces modernas e minimalistas
+* Cafeterias e marcas premium
+* Aplicações com estética aconchegante
+* Branding sofisticado e artesanal
+* Experiências visuais elegantes e acolhedoras
+
+A combinação dos tons terrosos com contrastes claros cria uma identidade visual forte, calorosa e memorável.
