@@ -1,70 +1,80 @@
-# PALETA DE CORES — CAFÉ KWAI • TONS TERROSOS E CAFÉ
+# PALETA DE CORES — GITHUB INSIGHTS • DESENVOLVIMENTO E TECNOLOGIA
 
-Uma seleção de tonalidades inspiradas na sofisticação dos grãos de café, madeira nobre e ambientes aconchegantes.
-A paleta transmite elegância, conforto e identidade artesanal, equilibrando profundidade, calor e modernidade.
+Uma seleção de tonalidades inspiradas no universo da programação, interfaces modernas, ambientes de desenvolvimento e na identidade visual do GitHub.
+
+A paleta transmite inovação, organização e profissionalismo, equilibrando contraste, legibilidade e estética tecnológica.
 
 ---
 
-### 1. #7F5734 — Café Torrado
+### 1. #2E2E2E — Terminal Escuro
 
 **BACKGROUND**
 
-Descrição:
-Um marrom quente e encorpado que remete aos tons naturais dos grãos recém-torrados. Ideal para fundos sofisticados e atmosferas acolhedoras.
+Descrição:  
+Cinza grafite profundo inspirado em terminais e editores de código modernos. Ideal para criar uma base elegante e confortável para longos períodos de uso.
 
 ---
 
-### 2. #471B01 — Espresso Intenso
+### 2. #6B8838 — Commit Verde
 
-**PRIMARY_BROWN**
+**GREEN**
 
-Descrição:
-Marrom profundo e marcante, inspirado na intensidade de um espresso forte. Representa elegância, força visual e personalidade premium.
-
----
-
-### 3. #5F3416 — Canela Amadeirada
-
-**SECONDARY_BROWN**
-
-Descrição:
-Tom terroso equilibrado com nuances amadeiradas e quentes. Excelente para composições refinadas e elementos de apoio visual.
+Descrição:  
+Verde equilibrado que remete aos indicadores de commits, contribuições e sucesso em operações dentro do ecossistema Git. Traz sensação de progresso e produtividade.
 
 ---
 
-### 4. #D1975D — Caramelo Cremoso
+### 3. #314D01 — Branch Principal
+
+**PRIMARY_GREEN**
+
+Descrição:  
+Verde escuro e robusto inspirado na estabilidade de uma branch principal bem estruturada. Representa confiança, consistência e segurança visual.
+
+---
+
+### 4. #356118 — Merge Concluído
+
+**SECONDARY_GREEN**
+
+Descrição:  
+Tom intermediário que simboliza integração, colaboração e evolução contínua dos projetos. Funciona perfeitamente em elementos de apoio e destaques secundários.
+
+---
+
+### 5. #CFCFCF — Interface Neutra
 
 **BACKGROUND_BUTTON**
 
-Descrição:
-Uma tonalidade dourada suave inspirada em caramelo e espuma de café. Cria destaque elegante para botões e elementos interativos.
+Descrição:  
+Cinza claro utilizado para botões, cartões e elementos interativos. Proporciona contraste suave e mantém a aparência limpa e profissional.
 
 ---
 
-### 5. #F0AF7B — Latte Aveludado
+### 6. RGB(139, 214, 110) — Código Ativo
 
 **TEXT_TITLE**
 
-Descrição:
-Tom claro e acolhedor que adiciona leveza e contraste sofisticado. Ideal para títulos, detalhes e elementos de destaque visual.
+Descrição:  
+Verde vibrante inspirado em sintaxes destacadas em editores de código. Excelente para títulos, indicadores importantes e informações que precisam chamar atenção.
 
 ---
 
-### 6. #0C1016 — Noir Profundo
+### 7. #0C1016 — GitHub Midnight
 
 **DARK**
 
-Descrição:
-Preto azulado extremamente sofisticado, remetendo a ambientes modernos e minimalistas. Traz profundidade e contraste premium.
+Descrição:  
+Tom extremamente escuro inspirado nos temas dark modernos utilizados por desenvolvedores. Adiciona profundidade e sofisticação à interface.
 
 ---
 
-### 7. #FFFFFF — Branco Porcelana
+### 8. #FFFFFF — Branco Digital
 
 **WHITE**
 
-Descrição:
-Branco puro e limpo, utilizado para equilíbrio visual, clareza e elegância em interfaces contemporâneas.
+Descrição:  
+Branco puro para textos, contrastes e áreas de respiro visual. Essencial para manter legibilidade e equilíbrio na composição.
 
 ---
 
@@ -72,10 +82,28 @@ Branco puro e limpo, utilizado para equilíbrio visual, clareza e elegância em 
 
 Esta paleta é ideal para:
 
-* Interfaces modernas e minimalistas
-* Cafeterias e marcas premium
-* Aplicações com estética aconchegante
-* Branding sofisticado e artesanal
-* Experiências visuais elegantes e acolhedoras
+- Dashboards de repositórios GitHub
+- Visualização de projetos e contribuições
+- Ferramentas para desenvolvedores
+- Aplicações focadas em produtividade
+- Interfaces dark mode
+- Sistemas de análise de código e métricas
 
-A combinação dos tons terrosos com contrastes claros cria uma identidade visual forte, calorosa e memorável.
+A combinação dos tons escuros com verdes inspirados em versionamento e colaboração cria uma identidade visual moderna, tecnológica e alinhada ao universo do desenvolvimento de software.
+
+## Estrutura de Cores
+
+```javascript
+const ColorTypes = {
+    BACKGROUND: "#2E2E2E",
+    GREEN: "#6B8838",
+    PRIMARY_GREEN: "#314D01",
+    SECONDARY_GREEN: "#356118",
+    BACKGROUND_BUTTON: "#CFCFCF",
+    TEXT_TITLE: "rgb(139, 214, 110)",
+    DARK: "#0C1016",
+    WHITE: "#FFFFFF",
+};
+
+export default ColorTypes;
+```

@@ -11,7 +11,7 @@ export default function SignUp({ navigation }) {
   <View style={styles.container}>
     <ArrowBack navigation={navigation}/>
     <View style={styles.inputContainer}>
-      <Image style={styles.logo} source={require('../assets/images/logo/LogoCafeKwaiCorMarromClaro.png')}/>
+      <Image style={styles.logo} source={require('../assets/images/logo/LogoGPVTextoVerde.png')}/>
       <Text style={styles.title}>Cadastrar-se</Text>
       <InputField label="Nome" placeholder="Digite seu nome" secure={false} icon={<MaterialIcons name="account-circle" size={24} color={ColorTypes.TEXT_TITLE} />} />
       <InputField label="Email" placeholder="Digite seu email" secure={false} icon={<MaterialIcons name="email" size={24} color={ColorTypes.TEXT_TITLE} />} />
@@ -20,7 +20,7 @@ export default function SignUp({ navigation }) {
     </View>
     <View style={styles.buttonContainer}>
       <ButtonComponent text="Cadastrar" function={() => navigation.navigate(Routes.SIGNIN)}/>
-      <Text style={styles.titleSignUp}>Já tem uma conta? Faça Login</Text>
+      <Text style={styles.titleSignUp}>Já tem uma conta? <Text style={styles.link} onPress={() => navigation.navigate(Routes.SIGNIN)}>Faça Login</Text></Text>
       <ButtonComponent text="Login" function={() => navigation.navigate(Routes.SIGNIN)}/>
     </View>
   </View>
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
         gap: 10,
     },
     logo: {
-        width: 120,
-        height: 100,
+        width: 220,
+        height: 120,
         contain: 'cover',
         alignSelf: 'center',
     },
@@ -54,7 +54,10 @@ const styles = StyleSheet.create({
     titleSignUp: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: ColorTypes.PRIMARY_BROWN,
+        color: ColorTypes.SECONDARY_GREEN,
+    },
+    link: {
+        color: ColorTypes.TEXT_TITLE,
     },
     buttonContainer: {
       marginTop: 40,

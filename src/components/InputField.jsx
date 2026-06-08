@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: ColorTypes.PRIMARY_BROWN,
+    backgroundColor: ColorTypes.PRIMARY_GREEN,
     borderBottomWidth: 5,
     borderColor: ColorTypes.TEXT_TITLE,
     borderRadius: 8,

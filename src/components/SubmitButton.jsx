@@ -25,6 +25,6 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         backgroundColor: ColorTypes.BACKGROUND_BUTTON,
         borderWidth: 2,
-        borderColor: ColorTypes.PRIMARY_BROWN,
+        borderColor: ColorTypes.PRIMARY_GREEN,
     }
 });

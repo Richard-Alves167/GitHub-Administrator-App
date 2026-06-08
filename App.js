@@ -11,7 +11,7 @@ SplashScreen.preventAutoHideAsync().catch(() => {});
 export default function App() {
   const [showSplashVideo, setShowSplashVideo] = useState(true);
   const player = useVideoPlayer(
-    require('./src/assets/videos/KwaiCafeLogovideoIntroductionWithoutBackground.webm')
+    require('./src/assets/videos/VideoLogoGPV.webm')
   );
   useEffect(() => {
     player.loop = false;
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: ColorTypes.PRIMARY_BROWN,
+    backgroundColor: ColorTypes.BACKGROUND,
   },
   video: {
     width: 250,

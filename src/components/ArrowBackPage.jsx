@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     gap: 10,
-    backgroundColor: ColorTypes.PRIMARY_BROWN,
+    backgroundColor: ColorTypes.PRIMARY_GREEN,
     borderWidth: 2.5,
     borderColor: ColorTypes.TEXT_TITLE,
     borderRadius: 30,

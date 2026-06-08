@@ -1,9 +1,10 @@
 const ColorTypes = {
-    BACKGROUND: "#7F5734",
-    PRIMARY_BROWN: "#471B01",
-    SECONDARY_BROWN: "#5F3416",
-    BACKGROUND_BUTTON: "#d1975d",
-    TEXT_TITLE: "#f0af7b",
+    BACKGROUND: "#2e2e2e",
+    GREEN: "#6b8838", 
+    PRIMARY_GREEN: "#314d01",
+    SECONDARY_GREEN: "#356118",
+    BACKGROUND_BUTTON: "#cfcfcf",
+    TEXT_TITLE: "rgb(139, 214, 110)",
     DARK: "#0C1016",
     WHITE: "#FFFFFF",
 };

@@ -11,14 +11,14 @@ import Dashboard from './DashboardNavigator';
 const Drawer = createDrawerNavigator();
 
 export default function DrawerNavigator() {
-    return (
-        <Drawer.Navigator
-        drawerContent={(props) => (
+  return (
+    <Drawer.Navigator
+      drawerContent={(props) => (
         <CustomDrawerContent {...props} />
       )}
-        screenOptions={{
+      screenOptions={{
         headerStyle: {
-          backgroundColor: ColorTypes.PRIMARY_BROWN,
+          backgroundColor: ColorTypes.PRIMARY_GREEN,
         },
         headerTintColor: ColorTypes.TEXT_TITLE,
         headerTitleStyle: {
@@ -28,7 +28,7 @@ export default function DrawerNavigator() {
           backgroundColor: ColorTypes.BACKGROUND,
           width: 300,
         },
-        drawerActiveBackgroundColor: ColorTypes.PRIMARY_BROWN,
+        drawerActiveBackgroundColor: ColorTypes.PRIMARY_GREEN,
         drawerActiveTintColor: ColorTypes.TEXT_TITLE,
         drawerInactiveTintColor: ColorTypes.WHITE,
         drawerLabelStyle: {
@@ -36,24 +36,24 @@ export default function DrawerNavigator() {
           fontWeight: 'bold',
         },
       }}>
-            <Drawer.Screen 
-                name={Routes.HOME} 
-                component={HomeScreen} 
-            />
-            <Drawer.Screen 
-                name={Routes.PRODUCT} 
-                component={ProductScreen} 
-            />
-            <Drawer.Screen
-                name={Routes.USER}
-                component={UserScreen}
-            />
-            <Drawer.Screen
-                name={Routes.DASHBOARD}
-                component={Dashboard}
-            />
-        </Drawer.Navigator>
-    )
+      <Drawer.Screen
+        name={Routes.HOME}
+        component={HomeScreen}
+      />
+      <Drawer.Screen
+        name={Routes.PRODUCT}
+        component={ProductScreen}
+      />
+      <Drawer.Screen
+        name={Routes.USER}
+        component={UserScreen}
+      />
+      <Drawer.Screen
+        name={Routes.DASHBOARD}
+        component={Dashboard}
+      />
+    </Drawer.Navigator>
+  )
 }
 
 function CustomDrawerContent(props) {
@@ -63,40 +63,40 @@ function CustomDrawerContent(props) {
       contentContainerStyle={styles.container}
     >
       <View style={styles.header}>
-            <Pressable
-            onPress={() => props.navigation.closeDrawer()}
-            >
-            <MaterialIcons
-                name="close"
-                size={40}
-                color={ColorTypes.TEXT_TITLE}
-            />
-            </Pressable>
-            <Text style={styles.title}>
-            CaféKwai
-            </Text>
-        </View>
-        <View style={styles.divider} />
-        <Pressable style={styles.accountInfo}
-            onPress={() => props.navigation.navigate(Routes.USER)}
-            >
-          <MaterialIcons name="account-circle" size={40} color={ColorTypes.TEXT_TITLE}/><Text style={styles.title}>User</Text>
+        <Pressable
+          onPress={() => props.navigation.closeDrawer()}
+        >
+          <MaterialIcons
+            name="close"
+            size={40}
+            color={ColorTypes.TEXT_TITLE}
+          />
         </Pressable>
-        <View style={styles.divider2} />
-        <DrawerItemList style={styles.listPages} {...props} />
-        <View style={styles.divider3} />
-        <View style={styles.footer}>
-          <View style={styles.autorFooter}>
-            <Image style={styles.logo} source={require('../assets/images/logo/LogoCafeKwaiCorMarromClaro.png')}/>
-            <View style={styles.descriptionFooter}>
-                <Text style={styles.descriptionFooter}>Copyright © 2026 CaféKwai.</Text>
-                <Text style={styles.descriptionFooter}>Todos os direitos reservados.</Text>
-                <Text style={styles.descriptionFooter}>Termos de Uso</Text>
-                <Text style={styles.descriptionFooter}>Política de Privacidade</Text>
-                <Text style={styles.descriptionFooter}>Contato</Text>
-            </View>
+        <Text style={styles.title}>
+          GitHub PV.
+        </Text>
+      </View>
+      <View style={styles.divider} />
+      <Pressable style={styles.accountInfo}
+        onPress={() => props.navigation.navigate(Routes.USER)}
+      >
+        <MaterialIcons name="account-circle" size={40} color={ColorTypes.TEXT_TITLE} /><Text style={styles.title}>User</Text>
+      </Pressable>
+      <View style={styles.divider2} />
+      <DrawerItemList style={styles.listPages} {...props} />
+      <View style={styles.divider3} />
+      <View style={styles.footer}>
+        <View style={styles.autorFooter}>
+          <Image style={styles.logo} source={require('../assets/images/logo/LogoGPVVerde.png')} />
+          <View style={styles.descriptionFooter}>
+            <Text style={styles.descriptionFooter}>Copyright © 2026 GitHubPV.</Text>
+            <Text style={styles.descriptionFooter}>Todos os direitos reservados.</Text>
+            <Text style={styles.descriptionFooter}>Termos de Uso</Text>
+            <Text style={styles.descriptionFooter}>Política de Privacidade</Text>
+            <Text style={styles.descriptionFooter}>Contato</Text>
           </View>
-       </View>
+        </View>
+      </View>
     </DrawerContentScrollView>
   );
 }
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     opacity: 0.3,
   },
-divider2: {
+  divider2: {
     height: 2,
     backgroundColor: ColorTypes.TEXT_TITLE,
     marginHorizontal: 10,
@@ -138,7 +138,7 @@ divider2: {
     alignItems: 'center',
     gap: 10,
     padding: 10,
-    backgroundColor: ColorTypes.PRIMARY_BROWN,
+    backgroundColor: ColorTypes.PRIMARY_GREEN,
     borderWidth: 2,
     borderColor: ColorTypes.TEXT_TITLE,
     borderRadius: 20,
@@ -166,9 +166,10 @@ divider2: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 5,
- },
+  },
   descriptionFooter: {
     fontSize: 12,
     color: ColorTypes.TEXT_TITLE,
-    fontWeight: 'bold',}
+    fontWeight: 'bold',
+  }
 });

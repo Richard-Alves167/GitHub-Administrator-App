@@ -26,7 +26,7 @@ export default function SignIn({ navigation }) {
   return (
   <View style={styles.container}>
     <View style={styles.inputContainer}>
-      <Image style={styles.logo} source={require('../assets/images/logo/LogoCafeKwaiCorMarromClaro.png')}/>
+      <Image style={styles.logo} source={require('../assets/images/logo/LogoGPVTextoVerde.png')}/>
       <Text style={styles.title}>Login</Text>
       <InputField 
         label="Email" 
@@ -46,7 +46,7 @@ export default function SignIn({ navigation }) {
     <AlertMessage msg={mensagem}/>
     <View style={styles.buttonContainer}>
       <ButtonComponent text="Entrar" function={handleSignIn}/>
-      <Text style={styles.titleSignUp}>Não tem uma conta? Cadastre-se</Text>
+      <Text style={styles.titleSignUp}>Não tem uma conta? <Text style={styles.link} onPress={() => navigation.navigate(Routes.SIGNUP)}>Cadastre-se</Text></Text>
       <ButtonComponent text="Cadastrar" function={() => navigation.navigate(Routes.SIGNUP)}/>
     </View>
   </View>
@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
         gap: 10,
     },
     logo: {
-        width: 120,
-        height: 100,
+        width: 220,
+        height: 120,
         contain: 'cover',
         alignSelf: 'center',
     },
@@ -80,7 +80,10 @@ const styles = StyleSheet.create({
     titleSignUp: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: ColorTypes.PRIMARY_BROWN,
+        color: ColorTypes.SECONDARY_GREEN,
+    },
+    link: {
+        color: ColorTypes.TEXT_TITLE,
     },
     buttonContainer: {
       gap: 20,

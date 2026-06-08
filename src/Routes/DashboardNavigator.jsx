@@ -16,7 +16,7 @@ export default function DashboardNavigator() {
         headerShown: false,
 
         tabBarStyle: {
-            backgroundColor: ColorTypes.PRIMARY_BROWN,
+            backgroundColor: ColorTypes.PRIMARY_GREEN,
             height: 70,
             borderTopWidth: 0,
             elevation: 0,
