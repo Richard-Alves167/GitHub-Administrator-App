@@ -1,12 +1,15 @@
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigation from './src/Routes/StackNavigator';
 import ColorTypes from './src/assets/ColorTypes';
+import AuthProvider from "./src/providers/AuthContext";
+import GitProvider from "./src/providers/GitContext";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { VideoView, useVideoPlayer } from 'expo-video';
 
-SplashScreen.preventAutoHideAsync().catch(() => {});
+SplashScreen.preventAutoHideAsync().catch(() => { });
 
 export default function App() {
   const [showSplashVideo, setShowSplashVideo] = useState(true);
@@ -32,9 +35,15 @@ export default function App() {
 
   if (!showSplashVideo) {
     return (
-      <NavigationContainer>
-        <StackNavigation />
-      </NavigationContainer>
+      <SafeAreaProvider>
+        <AuthProvider>
+          <GitProvider>
+            <NavigationContainer>
+              <StackNavigation />
+            </NavigationContainer>
+          </GitProvider>
+        </AuthProvider>
+      </SafeAreaProvider>
     );
   }
 
