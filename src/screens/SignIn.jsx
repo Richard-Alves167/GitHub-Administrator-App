@@ -21,7 +21,7 @@ export default function SignIn({ navigation }) {
     if (sucesso) {
       navigation.navigate(Routes.DRAWER, { screen: Routes.PROFILE })
     } else {
-      setMensagem("Credenciais incorretas!")
+      setErrorMensagem("Credenciais incorretas!")
     }
   }
 
@@ -33,7 +33,6 @@ export default function SignIn({ navigation }) {
         <InputField
           label="Email"
           placeholder="Digite seu email"
-          secure={false}
           icon={<MaterialIcons name="email" size={24} color={ColorTypes.TEXT_TITLE} />}
           onChangeText={setEmail}
         />
@@ -49,7 +48,6 @@ export default function SignIn({ navigation }) {
       <View style={styles.buttonContainer}>
         <ButtonComponent text="Entrar" function={handleSignIn} />
         <Text style={styles.titleSignUp}>Não tem uma conta? <Text style={styles.link} onPress={() => navigation.navigate(Routes.SIGNUP)}>Cadastre-se</Text></Text>
-        <ButtonComponent text="Cadastrar" function={() => navigation.navigate(Routes.SIGNUP)} />
       </View>
     </View>
   )
