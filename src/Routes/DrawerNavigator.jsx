@@ -8,6 +8,7 @@ import UserScreen from '../screens/User';
 import IssuesScreen from '../screens/Issues';
 import RepositoriesScreen from '../screens/Repositories';
 import Dashboard from './DashboardNavigator';
+import { useAuth } from "../providers/AuthContext";
 
 const Drawer = createDrawerNavigator();
 
@@ -58,6 +59,7 @@ export default function DrawerNavigator() {
 }
 
 function CustomDrawerContent(props) {
+  const { user, updateUser } = useAuth();
   return (
     <DrawerContentScrollView
       {...props}
@@ -81,7 +83,7 @@ function CustomDrawerContent(props) {
       <Pressable style={styles.accountInfo}
         onPress={() => props.navigation.navigate(Routes.USER)}
       >
-        <MaterialIcons name="account-circle" size={40} color={ColorTypes.TEXT_TITLE} /><Text style={styles.title}>User</Text>
+        <MaterialIcons name="account-circle" size={40} color={ColorTypes.TEXT_TITLE} /><Text style={styles.title}> {user?.nome || 'Usuário'}</Text>
       </Pressable>
       <View style={styles.divider2} />
       <DrawerItemList style={styles.listPages} {...props} />

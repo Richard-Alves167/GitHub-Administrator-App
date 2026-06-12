@@ -6,15 +6,15 @@ export default function InputField(props) {
 
   return (
     <View style={styles.inputView}>
-        <Text style={styles.text}>{props.label}</Text>
-        <View style={styles.inputContainer}>
+      <Text style={styles.text}>{props.label}</Text>
+      <View style={styles.inputContainer}>
         {props.icon}
-          {props.secure ? (
-              <TextInput style={styles.inputText} placeholder={props.placeholder} secureTextEntry={true} onChangeText={props.onChangeText}></TextInput>
-          ) : (
-              <TextInput style={styles.inputText} placeholder={props.placeholder} onChangeText={props.onChangeText}></TextInput>
-          )}
-        </View>
+        {props.secure ? (
+          <TextInput style={styles.inputText} value={props?.value} placeholder={props.placeholder} secureTextEntry={true} onChangeText={props.onChangeText}></TextInput>
+        ) : (
+          <TextInput style={styles.inputText} value={props?.value} placeholder={props.placeholder} onChangeText={props.onChangeText}></TextInput>
+        )}
+      </View>
     </View>
   );
 }
@@ -22,6 +22,9 @@ export default function InputField(props) {
 const styles = StyleSheet.create({
   inputView: {
     borderRadius: 5,
+    maxWidth: 500,
+    alignSelf: 'center',
+    marginBottom: 10,
   },
   text: {
     fontSize: 20,

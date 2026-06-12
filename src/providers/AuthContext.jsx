@@ -18,7 +18,7 @@ export default function AuthProvider({ children }) {
     }
 
     const login = (email, password) => {
-        if (email === "riichardd.08@gmail.com" && password === "27072006") {
+        if (email === "r" && password === "1") {
             setUser({ nome: "Richard", email: email, telefone: "21998228014" });
             return true;
         }
