@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import HomeScreen from "../screens/Home";
-import ProductScreen from "../screens/Product";
 import UserScreen from "../screens/User";
 
 const Tabs = createBottomTabNavigator()
@@ -37,20 +36,6 @@ export default function DashboardNavigator() {
             options={{
                     tabBarIcon: ({ color }) => (
                         <AntDesign name="home" size={24} color={color} />
-                    )
-                }}/>
-            <Tabs.Screen 
-            name="Produtos" component={ProductScreen}
-            options={{
-                    tabBarIcon: ({ color }) => (
-                        <AntDesign name="product" size={24} color={color} />
-                    )
-                }}/>
-            <Tabs.Screen 
-            name="Carrinho" component={ProductScreen}
-            options={{
-                    tabBarIcon: ({ color }) => (
-                        <AntDesign name="shopping-cart" size={24} color={color} />
                     )
                 }}/>
             <Tabs.Screen 

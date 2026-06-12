@@ -4,8 +4,9 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import ColorTypes from '../assets/ColorTypes';
 import Routes from '.';
 import HomeScreen from '../screens/Home';
-import ProductScreen from '../screens/Product';
 import UserScreen from '../screens/User';
+import IssuesScreen from '../screens/Issues';
+import RepositoriesScreen from '../screens/Repositories';
 import Dashboard from './DashboardNavigator';
 
 const Drawer = createDrawerNavigator();
@@ -37,20 +38,20 @@ export default function DrawerNavigator() {
         },
       }}>
       <Drawer.Screen
-        name={Routes.HOME}
-        component={HomeScreen}
-      />
-      <Drawer.Screen
-        name={Routes.PRODUCT}
-        component={ProductScreen}
-      />
-      <Drawer.Screen
         name={Routes.USER}
         component={UserScreen}
       />
       <Drawer.Screen
-        name={Routes.DASHBOARD}
-        component={Dashboard}
+        name={Routes.HOME}
+        component={HomeScreen}
+      />
+            <Drawer.Screen
+        name={Routes.REPOSITORIES}
+        component={RepositoriesScreen}
+      />
+            <Drawer.Screen
+        name={Routes.ISSUES}
+        component={IssuesScreen}
       />
     </Drawer.Navigator>
   )

@@ -4,7 +4,8 @@ const Routes = {
         SIGNIN: 'SignIn',
         SIGNUP: 'SignUp',
         HOME: 'Home',
-        PRODUCT: 'Product',
+        REPOSITORIES: 'Repositories',
+        ISSUES: 'Issues',
         USER: 'User',
     }
 
