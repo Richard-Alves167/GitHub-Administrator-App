@@ -1,6 +1,7 @@
 const ColorTypes = {
     BACKGROUND: "#2e2e2e",
     GREEN: "#6b8838", 
+    LIMONGREEN: "#71ff39",
     PRIMARY_GREEN: "#314d01",
     SECONDARY_GREEN: "#356118",
     BACKGROUND_BUTTON: "#cfcfcf",

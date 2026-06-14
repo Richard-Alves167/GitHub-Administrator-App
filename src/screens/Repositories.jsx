@@ -49,6 +49,15 @@ export default function Repositorios({navigation}) {
     })
         .sort((a, b) => ordenacao === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
 
+    if (usuarioGithub === null) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Carregando...</Text>
+            </View>
+        );
+    }
+
+
     return (
         <GestureHandlerRootView style={{backgroundColor: ColorTypes.BACKGROUND, flex: 1 }}>
             <View style={{ flex: 1 }}>
@@ -58,7 +67,7 @@ export default function Repositorios({navigation}) {
                         <Text style={styles.ProgressTitulo}>Repositórios</Text>
                         <Text style={styles.ProgressPercentagem}>{porcentagem}%</Text>
                     </View>
-                    <Progress.Bar progress={porcentagem / 100} width={null} color="#000000" unfilledColor="#e5e5e5" animated={true} borderWidth={0} height={3} />
+                    <Progress.Bar progress={porcentagem / 100} width={null} color={ColorTypes.LIMONGREEN} unfilledColor={ColorTypes.WHITE} animated={true} borderWidth={0} height={3} />
                 </View>
 
                 <View style={styles.filtros}>
@@ -186,12 +195,12 @@ const styles = StyleSheet.create({
     },
     ProgressTitulo: {
         fontSize: 24,
-        color: ColorTypes.SECONDARY_GREEN,
+        color: ColorTypes.LIMONGREEN,
     },
     ProgressPercentagem: {
         fontSize: 13,
         fontWeight: '500',
-        color: '#71ff39',
+        color: ColorTypes.LIMONGREEN,
     },
     swipeAction: {
         backgroundColor: ColorTypes.DARK,

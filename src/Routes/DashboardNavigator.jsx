@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Octicons from '@expo/vector-icons/Octicons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import HomeScreen from "../screens/Home";
 import RepositoriesScreen from "../screens/Repositories";
 import IssuesScreen from "../screens/Issues";
@@ -46,7 +47,7 @@ export default function DashboardNavigator() {
                 name={Routes.REPOSITORIES} component={RepositoriesScreen}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <MaterialIcons name="account-circle" size={24} color={color} />
+                        <Ionicons name="git-branch-outline" size={24} color={color} />
                     )
                 }} />
             <Tabs.Screen

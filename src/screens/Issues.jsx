@@ -1,82 +1,83 @@
-import { StyleSheet, View, Text, ImageBackground, Image, FlatList, Pressable } from 'react-native';
-import Routes from '../Routes/index';
+import { StyleSheet, View, Text, FlatList, Pressable } from "react-native";
 import ColorTypes from '../assets/ColorTypes';
-import ArrowBack from '../components/ArrowBackPage';
-import * as Progress from 'react-native-progress';
-import { useNavigation } from '@react-navigation/native';
 import { useGit } from "../providers/GitContext";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
 
-export default function Repositorios({navigation}) {
-    const { repositorios, buscarRepositoriosGithub, usuarioGithub } = useGit();
-    const loadingRef = useRef(false);
-    const pageRef = useRef(1);
-    const [refreshing, setRefreshing] = useState(false);
-    const total = usuarioGithub?.public_repos || 0;
-    const carregados = repositorios.length;
-    const porcentagem = total > 0 ? Math.min(Math.round((carregados / total) * 100), 100) : 0;
-    const [ordenacao, setOrdenacao] = useState('asc');
+export default function Issues() {
+    const { issues, atualizarStatusIssue, usuarioGithub } = useGit();
     const [filtro, setFiltro] = useState('todos');
+    const [ordenacao, setOrdenacao] = useState('asc');
 
-    async function carregarMais() {
-        if (loadingRef.current) return;
-        loadingRef.current = true;
-        pageRef.current += 1;
-        await buscarRepositoriosGithub(pageRef.current);
-        loadingRef.current = false;
-    }
+    const filtered = [...issues].filter(issue => {
+        if (filtro === 'aberta') return issue.state === 'open';
+        if (filtro === 'fechada') return issue.state === 'closed';
+        return true;
+    })
+        .sort((a, b) => ordenacao === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title));
 
-    async function onRefresh() {
-        setRefreshing(true);
-        pageRef.current = 1;
-        await buscarRepositoriosGithub(1);
-        setRefreshing(false);
-    }
-
-    function renderSwipeAction() {
+    function renderSwipeEsquerda(issue) {
         return (
-            <View style={styles.swipeAction}>
-                <Text style={styles.swipeTexto}>Ver detalhes</Text>
+            <Pressable
+                style={[styles.swipe, { backgroundColor: ColorTypes.PRIMARY_GREEN }]}
+                onPress={() => atualizarStatusIssue(issue, 'open')}
+            >
+                <Text style={styles.swipeTexto}>Abrir</Text>
+            </Pressable>
+        );
+    }
+
+    function renderSwipeDireita(issue) {
+        return (
+            <Pressable
+                style={[styles.swipe, { backgroundColor: ColorTypes.DARK }]}
+                onPress={() => atualizarStatusIssue(issue, 'closed')}
+            >
+                <Text style={styles.swipeTexto}>Fechar</Text>
+            </Pressable>
+        );
+    }
+
+    if (usuarioGithub === null) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Carregando...</Text>
             </View>
         );
     }
 
-    const sorted = [...repositorios].filter(repo => {
-        if (filtro === 'publico') return !repo.private;
-        if (filtro === 'privado') return repo.private;
-        return true;
-    })
-        .sort((a, b) => ordenacao === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
-
     return (
-        <GestureHandlerRootView style={{backgroundColor: ColorTypes.BACKGROUND, flex: 1 }}>
+        <GestureHandlerRootView style={{ backgroundColor: ColorTypes.BACKGROUND, flex: 1 }}>
             <View style={{ flex: 1 }}>
-
                 <View style={styles.ProgressContainer}>
                     <View style={styles.ProgressLinha}>
-                        <Text style={styles.ProgressTitulo}>Repositórios</Text>
-                        <Text style={styles.ProgressPercentagem}>{porcentagem}%</Text>
+                        <Text style={styles.ProgressTitulo}>Issues</Text>
                     </View>
-                    <Progress.Bar progress={porcentagem / 100} width={null} color="#000000" unfilledColor="#e5e5e5" animated={true} borderWidth={0} height={3} />
                 </View>
-
                 <View style={styles.filtros}>
                     <View style={styles.filtroGrupo}>
-                        {['todos', 'publico', 'privado'].map(opcao => (
-                            <Pressable key={opcao} onPress={() => setFiltro(opcao)} style={[styles.filtroBotao, filtro === opcao && styles.filtroBotaoAtivo]}>
-                                <Text style={[styles.filtroTexto, filtro === opcao && styles.filtroTextoAtivo]}>
-                                    {opcao}
+                        {['todos', 'aberta', 'fechada'].map(op => (
+                            <Pressable
+                                key={op}
+                                onPress={() => setFiltro(op)}
+                                style={[styles.filtroBotao, filtro === op && styles.filtroBotaoAtivo]}
+                            >
+                                <Text style={[styles.filtroTexto, filtro === op && styles.filtroTextoAtivo]}>
+                                    {op}
                                 </Text>
                             </Pressable>
                         ))}
                     </View>
 
                     <View style={styles.filtroGrupo}>
-                        {['asc', 'desc'].map(opcao => (
-                            <Pressable key={opcao} onPress={() => setOrdenacao(opcao)} style={[styles.filtroBotao, ordenacao === opcao && styles.filtroBotaoAtivo]}>
-                                <Text style={[styles.filtroTexto, ordenacao === opcao && styles.filtroTextoAtivo]}>
-                                    {opcao === 'asc' ? 'Asc' : 'Desc'}
+                        {['asc', 'desc'].map(op => (
+                            <Pressable
+                                key={op}
+                                onPress={() => setOrdenacao(op)}
+                                style={[styles.filtroBotao, ordenacao === op && styles.filtroBotaoAtivo]}
+                            >
+                                <Text style={[styles.filtroTexto, ordenacao === op && styles.filtroTextoAtivo]}>
+                                    {op === 'asc' ? 'A-Z' : 'Z-A'}
                                 </Text>
                             </Pressable>
                         ))}
@@ -84,26 +85,20 @@ export default function Repositorios({navigation}) {
                 </View>
 
                 <FlatList
-                    data={sorted}
-                    keyExtractor={(repo) => String(repo.id)}
-                    onEndReached={carregarMais}
-                    refreshing={refreshing}
-                    onRefresh={onRefresh}
-                    renderItem={({ item: repo }) => (
-                        <Swipeable
-                            renderRightActions={renderSwipeAction}
-                            onSwipeableOpen={() => navigation.navigate(Routes.REPO, { repo })}>
-                            <Pressable onPress={() => navigation.navigate(Routes.REPO, { repo })} style={styles.RepoContainer}>
-                                <View style={styles.RepoLeft}>
-                                    <Text style={styles.RepoName}>{repo.name}</Text>
-                                    <Text style={styles.RepoDesc} numberOfLines={1}>{repo.description}</Text>
-                                    <View style={styles.RepoMeta}>
-                                        <Text style={repo.private ? styles.RepoPrivateBadge : styles.RepoPublicBadge}>
-                                            {repo.private ? 'Privado' : 'Público'}
-                                        </Text>
-                                    </View>
+                    data={filtered}
+                    keyExtractor={(issue) => String(issue.id)}
+                    ListEmptyComponent={<Text style={styles.vazio}>Nenhuma issue encontrada.</Text>}
+                    renderItem={({ item: issue }) => (
+                        <Swipeable renderLeftActions={() => renderSwipeEsquerda(issue)} renderRightActions={() => renderSwipeDireita(issue)}>
+                            <View style={styles.card}>
+                                <View style={{ flex: 1 }}>
+                                    <Text style={styles.titulo}>{issue.title}</Text>
+                                    <Text style={styles.repo}>{issue.repository?.full_name}</Text>
                                 </View>
-                            </Pressable>
+                                <Text style={issue.state === 'open' ? styles.aberta : styles.fechada}>
+                                    {issue.state === 'open' ? 'aberta' : 'fechada'}
+                                </Text>
+                            </View>
                         </Swipeable>
                     )}
                 />
@@ -113,67 +108,6 @@ export default function Repositorios({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    RepoContainer: {
-        backgroundColor: ColorTypes.BACKGROUND,
-        borderWidth: 0.5,
-        borderColor: ColorTypes.BORDER,
-        borderRadius: 12,
-        padding: 16,
-        marginHorizontal: 16,
-        marginBottom: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-    },
-    RepoLeft: {
-        flex: 1,
-        gap: 4,
-    },
-    RepoName: {
-        fontSize: 15,
-        fontWeight: '500',
-        color: ColorTypes.TEXT_TITLE,
-    },
-    RepoDesc: {
-        fontSize: 13,
-        color: ColorTypes.TEXT_TITLE,
-    },
-    RepoMeta: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 10,
-        marginTop: 4,
-    },
-    RepoPrivateBadge: {
-        fontSize: 11,
-        paddingVertical: 2,
-        paddingHorizontal: 8,
-        borderRadius: 20,
-        overflow: 'hidden',
-        backgroundColor: '#f0f0f0',
-        color: '#666',
-        fontWeight: '500',
-    },
-    RepoPublicBadge: {
-        fontSize: 11,
-        paddingVertical: 2,
-        paddingHorizontal: 8,
-        borderRadius: 20,
-        overflow: 'hidden',
-        color: ColorTypes.GREEN,
-        fontWeight: '500',
-    },
-    Arrow: {
-        fontSize: 18,
-        color: ColorTypes.TEXT_TITLE,
-        marginTop: 2,
-    },
-    NoRepos: {
-        textAlign: 'center',
-        fontSize: 16,
-        marginTop: 40,
-        color: '#888',
-    },
     ProgressContainer: {
         paddingHorizontal: 16,
         paddingVertical: 14,
@@ -186,37 +120,18 @@ const styles = StyleSheet.create({
     },
     ProgressTitulo: {
         fontSize: 24,
-        color: ColorTypes.SECONDARY_GREEN,
-    },
-    ProgressPercentagem: {
-        fontSize: 13,
-        fontWeight: '500',
-        color: '#71ff39',
-    },
-    swipeAction: {
-        backgroundColor: ColorTypes.DARK,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: 120,
-        marginBottom: 10,
-        borderRadius: 10,
-        marginHorizontal: 4,
-    },
-    swipeTexto: {
-        color: ColorTypes.WHITE,
-        fontSize: 13,
-        fontWeight: '500',
+        color: ColorTypes.LIMONGREEN,
     },
     filtros: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 16,
-        paddingBottom: 12,
+        paddingVertical: 12,
         gap: 8,
     },
     filtroGrupo: {
         flexDirection: 'row',
-        gap: 6,
+        gap: 6
     },
     filtroBotao: {
         paddingVertical: 5,
@@ -227,13 +142,70 @@ const styles = StyleSheet.create({
     },
     filtroBotaoAtivo: {
         backgroundColor: ColorTypes.SECONDARY_GREEN,
-        borderColor: ColorTypes.GREEN,
+        borderColor: ColorTypes.GREEN
     },
     filtroTexto: {
         fontSize: 12,
-        color: ColorTypes.BACKGROUND_BUTTON,
+        color: ColorTypes.BACKGROUND_BUTTON
     },
     filtroTextoAtivo: {
-        color: ColorTypes.WHITE,
+        color: ColorTypes.WHITE
+    },
+    card: {
+        backgroundColor: ColorTypes.BACKGROUND,
+        borderWidth: 0.5,
+        borderColor: ColorTypes.BORDER,
+        borderRadius: 12,
+        padding: 16,
+        marginHorizontal: 16,
+        marginBottom: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 12,
+    },
+    titulo: {
+        fontSize: 14,
+        fontWeight: '500',
+        color: ColorTypes.TEXT_TITLE,
+        marginBottom: 3
+    },
+    repo: {
+        fontSize: 12,
+        color: ColorTypes.TEXT_TITLE
+    },
+    aberta: {
+        fontSize: 11, fontWeight: '500',
+        paddingVertical: 3, paddingHorizontal: 8,
+        borderRadius: 20, overflow: 'hidden',
+        backgroundColor: '#e6f4ea', color: '#2d7a3a',
+    },
+    fechada: {
+        fontSize: 11,
+        fontWeight: '500',
+        paddingVertical: 3,
+        paddingHorizontal: 8,
+        borderRadius: 20,
+        overflow: 'hidden',
+        backgroundColor: '#f0f0f0',
+        color: '#666',
+    },
+    swipe: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 80,
+        marginBottom: 10,
+        borderRadius: 10,
+        marginHorizontal: 4,
+    },
+    swipeTexto: {
+        color: '#fff',
+        fontSize: 13,
+        fontWeight: '500'
+    },
+    vazio: {
+        textAlign: 'center',
+        fontSize: 16,
+        marginTop: 40,
+        color: '#888'
     },
 });
