@@ -10,11 +10,11 @@ import { useGit } from "../providers/GitContext";
 import { useState } from "react";
 
 export default function User({ navigation }) {
-    const { user, updateUser } = useAuth();
+    const { data, updateUser } = useAuth();
     const { carregarDadosGithub } = useGit();
-    const [nome, setNome] = useState(user?.nome || "");
-    const [email, setEmail] = useState(user?.email || "");
-    const [telefone, setTelefone] = useState(user?.telefone || "");
+    const [nome, setNome] = useState(data?.user?.nome || "");
+    const [email, setEmail] = useState(data?.user?.email || "");
+    const [telefone, setTelefone] = useState(data?.user?.telefone || "");
     const [token, setToken] = useState("");
 
     async function save() {

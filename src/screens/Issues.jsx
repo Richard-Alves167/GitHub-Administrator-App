@@ -14,8 +14,7 @@ export default function Issues() {
         if (filtro === 'aberta') return issue.state === 'open';
         if (filtro === 'fechada') return issue.state === 'closed';
         return true;
-    })
-        .sort((a, b) => ordenacao === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title));
+    }).sort((a, b) => ordenacao === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title));
 
     function renderSwipeEsquerda(issue) {
         return (

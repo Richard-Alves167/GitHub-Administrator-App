@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useReducer } from 'react';
 
 const AuthContext = createContext();
 
@@ -6,34 +6,55 @@ export function useAuth() {
     return useContext(AuthContext);
 }
 
+const initialData = {
+    user: null,
+    registeredUser: null,
+}
+
+function authReducer(data, action) {
+    switch(action.type) {
+        case "set_user":
+            return {...data, user: action.payload};
+        case "set_resgisteredUser":
+            return {...data, registeredUser: action.payload};
+        default:
+            return data;
+    }
+} 
+
 export default function AuthProvider({ children }) {
-    const [registeredUser, setRegisteredUser] = useState(null);
-    const [user, setUser] = useState(null);
+    const [data, dispatch] = useReducer(authReducer, initialData);
 
-    const register = (nome, telefone, email, password) => {
-        setRegisteredUser({ nome, telefone, email, password });
-    }
-    const updateUser = (nome, telefone, email) => {
-        setUser({ nome, telefone, email });
-    }
+    const register = (nome, telefone, email, password) => dispatch({
+        type: "set_resgisteredUser", payload: {nome, telefone, email, password}
+    });
 
-    const login = (email, password) => {
-        if (email === "r" && password === "1") {
-            setUser({ nome: "Richard", email: email, telefone: "21998228014" });
+    const updateUser = (nome, telefone, email) => dispatch({
+        type: "set_user", payload: {nome, telefone, email}
+    });
+
+    /*const login = (email, password) => {
+        if (registeredUser && email === registeredUser.email && password === registeredUser.password) {
+            dispatch({type: "set_user", payload: { nome: registeredUser.nome, email: email, telefone: registeredUser.telefone }});
             return true;
         }
-        if (registeredUser && email === registeredUser.email && password === registeredUser.password) {
-            setUser({nome: registeredUser.nome, email: email, telefone: registeredUser.telefone});
+
+        return false;
+    };*/
+    const login = (email, password) => {
+        if (email === "r" && password === "1") {
+            dispatch({type: "set_user", payload: { nome: "Richard", email: email, telefone: "21998228013" }});
             return true;
         }
         return false;
     };
+
     const logout = () => {
-        setUser(null);
+        dispatch({type: "set_user", payload: null});
     };
 
     return (
-        <AuthContext.Provider value={{ user, registeredUser, register, login, logout, updateUser }}>
+        <AuthContext.Provider value={{ data, register, login, logout, updateUser }}>
             {children}
         </AuthContext.Provider>
     );

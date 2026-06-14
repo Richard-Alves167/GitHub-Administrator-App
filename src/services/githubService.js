@@ -21,7 +21,7 @@ export async function buscarUsuarioGithub(userToken) {
 
 export async function buscarRepositoriosGithub(page = 1, userToken) {
     try {
-        const response = await fetch(`https://api.github.com/user/repos?page=${page}`, { headers: getHeaders(userToken) });
+        const response = await fetch(`https://api.github.com/user/repos?page=${page}&per_page=10`, { headers: getHeaders(userToken) });
         if (!response.ok) {
             throw new Error("Erro ao buscar repositórios");
         }
@@ -41,10 +41,8 @@ export async function buscarIssuesGithub(userToken) {
             headers: getHeaders(userToken)
         });
         if (!response.ok) throw new Error("Erro ao buscar issues");
-
         const data = await response.json();
         return data;
-
     } catch (error) {
         console.error(error.message);
         return [];
