@@ -1,29 +1,29 @@
 {
   "expo": {
-    "name": "KwaiCafe",
-    "slug": "App-Mobile",
+    "name": "GitHub Administrator App",
+    "slug": "GitHub-App",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/images/logo/iconeCafeKwaiComFundo.png",
+    "icon": "./src/assets/images/logo/LogoGPVVerde.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./src/assets/images/logo/logoCafeKwaiBrancoReduzido.png",
+      "image": "./src/assets/images/logo/LogoGPVVerde.png",
       "resizeMode": "contain",
-      "backgroundColor": "#471B01"
+      "backgroundColor": "#2e2e2e"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/logo/iconeCafeKwai.png",
-        "backgroundColor": "#471B01"
+        "foregroundImage": "./src/assets/images/logo/LogoGPVVerde.png",
+        "backgroundColor": "#2e2e2e"
       },
       "edgeToEdgeEnabled": true
     },
     "web": {
-      "favicon": "../assets/images/logo/iconeCafeKwaiComFundo.png"
+      "favicon": "../assets/images/logo/LogoGPVVerde.png"
     },
     "plugins": [
       "expo-video",

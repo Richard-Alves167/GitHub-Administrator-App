@@ -2,6 +2,7 @@ import { StyleSheet, View, Text, ImageBackground, Image, FlatList, Pressable } f
 import Routes from '../Routes/index';
 import ColorTypes from '../assets/ColorTypes';
 import ArrowBack from '../components/ArrowBackPage';
+import ViewNoGitHubToken from '../components/ViewNoGitHubToken';
 import * as Progress from 'react-native-progress';
 import { useNavigation } from '@react-navigation/native';
 import { useGit } from "../providers/GitContext";
@@ -51,9 +52,7 @@ export default function Repositorios({navigation}) {
 
     if (usuarioGithub === null) {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Carregando...</Text>
-            </View>
+            <ViewNoGitHubToken></ViewNoGitHubToken>
         );
     }
 

@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text, FlatList, Pressable } from "react-native";
 import ColorTypes from '../assets/ColorTypes';
+import ViewNoGitHubToken from '../components/ViewNoGitHubToken';
 import { useGit } from "../providers/GitContext";
 import { useState } from "react";
 import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -40,9 +41,7 @@ export default function Issues() {
 
     if (usuarioGithub === null) {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Carregando...</Text>
-            </View>
+            <ViewNoGitHubToken></ViewNoGitHubToken>
         );
     }
 
