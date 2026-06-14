@@ -19,7 +19,7 @@ export default function SignIn({ navigation }) {
   function handleSignIn() {
     const sucesso = login(email, password)
     if (sucesso) {
-      navigation.navigate(Routes.DRAWER, { screen: Routes.PROFILE })
+      navigation.navigate(Routes.DASHBOARD)
     } else {
       setErrorMensagem("Credenciais incorretas!")
     }

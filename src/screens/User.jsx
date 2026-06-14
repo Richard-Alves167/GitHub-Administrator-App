@@ -28,8 +28,7 @@ export default function User({ navigation }) {
     }
 
     return (
-        <ScrollView style={styles.container}>
-            <ArrowBack navigation={navigation} />
+        <View style={styles.container}>
             <Text style={styles.title}>Perfil</Text>
             <Text style={styles.subTitle}>Consulte ou altere suas informações</Text>
             <View style={styles.Form}>
@@ -65,7 +64,7 @@ export default function User({ navigation }) {
                     <ButtonComponent text="Salvar" function={save} />
                 </View>
             </View>
-        </ScrollView>
+        </View>
     )
 }
 
@@ -75,6 +74,8 @@ const styles = StyleSheet.create({
         gap: 10,
         backgroundColor: ColorTypes.BACKGROUND,
         padding: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     title: {
         fontSize: 35,

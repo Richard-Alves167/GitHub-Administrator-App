@@ -6,7 +6,7 @@ const Routes = {
         HOME: 'Home',
         REPOSITORIES: 'Repositories',
         ISSUES: 'Issues',
-        USER: 'User',
+        USER: 'Perfil',
     }
 
 export default Routes;

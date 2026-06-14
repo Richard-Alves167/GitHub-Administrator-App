@@ -76,7 +76,7 @@ export default function Repositorios({navigation}) {
                         {['asc', 'desc'].map(opcao => (
                             <Pressable key={opcao} onPress={() => setOrdenacao(opcao)} style={[styles.filtroBotao, ordenacao === opcao && styles.filtroBotaoAtivo]}>
                                 <Text style={[styles.filtroTexto, ordenacao === opcao && styles.filtroTextoAtivo]}>
-                                    {opcao === 'asc' ? 'A-Z' : 'Z-A'}
+                                    {opcao === 'asc' ? 'Asc' : 'Desc'}
                                 </Text>
                             </Pressable>
                         ))}
