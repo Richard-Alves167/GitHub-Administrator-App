@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, FlatList, Pressable } from "react-native";
 import ColorTypes from '../assets/ColorTypes';
 import ViewNoGitHubToken from '../components/ViewNoGitHubToken';
+import CardIssue from '../components/CardIssue';
 import { useGit } from "../providers/GitContext";
 import { useState } from "react";
 import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -16,27 +17,7 @@ export default function Issues() {
         return true;
     }).sort((a, b) => ordenacao === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title));
 
-    function renderSwipeEsquerda(issue) {
-        return (
-            <Pressable
-                style={[styles.swipe, { backgroundColor: ColorTypes.PRIMARY_GREEN }]}
-                onPress={() => atualizarStatusIssue(issue, 'open')}
-            >
-                <Text style={styles.swipeTexto}>Abrir</Text>
-            </Pressable>
-        );
-    }
-
-    function renderSwipeDireita(issue) {
-        return (
-            <Pressable
-                style={[styles.swipe, { backgroundColor: ColorTypes.DARK }]}
-                onPress={() => atualizarStatusIssue(issue, 'closed')}
-            >
-                <Text style={styles.swipeTexto}>Fechar</Text>
-            </Pressable>
-        );
-    }
+    
 
     if (usuarioGithub === null) {
         return (
@@ -87,17 +68,7 @@ export default function Issues() {
                     keyExtractor={(issue) => String(issue.id)}
                     ListEmptyComponent={<Text style={styles.vazio}>Nenhuma issue encontrada.</Text>}
                     renderItem={({ item: issue }) => (
-                        <Swipeable renderLeftActions={() => renderSwipeEsquerda(issue)} renderRightActions={() => renderSwipeDireita(issue)}>
-                            <View style={styles.card}>
-                                <View style={{ flex: 1 }}>
-                                    <Text style={styles.titulo}>{issue.title}</Text>
-                                    <Text style={styles.repo}>{issue.repository?.full_name}</Text>
-                                </View>
-                                <Text style={issue.state === 'open' ? styles.aberta : styles.fechada}>
-                                    {issue.state === 'open' ? 'aberta' : 'fechada'}
-                                </Text>
-                            </View>
-                        </Swipeable>
+                        <CardIssue issue={issue} atualizarStatusIssue={atualizarStatusIssue} />
                     )}
                 />
             </View>
