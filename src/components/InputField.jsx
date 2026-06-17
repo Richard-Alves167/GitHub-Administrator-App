@@ -4,6 +4,18 @@ import Fontisto from '@expo/vector-icons/Fontisto';
 
 export default function InputField(props) {
 
+  if (props.information) {
+    return (
+      <View style={styles.inputView}>
+        <Text style={styles.text}>{props.label}</Text>
+        <View style={styles.inputContainerInfo}>
+          {props.icon}
+          <TextInput style={styles.inputText} value={props?.value} disabled></TextInput>
+        </View>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.inputView}>
       <Text style={styles.text}>{props.label}</Text>
@@ -20,6 +32,15 @@ export default function InputField(props) {
 }
 
 const styles = StyleSheet.create({
+  inputContainerInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: ColorTypes.PRIMARY_GREEN,
+    borderWidth: 2.5,
+    borderColor: ColorTypes.TEXT_TITLE,
+    borderRadius: 8,
+    paddingLeft: 10,
+  },
   inputView: {
     borderRadius: 5,
     maxWidth: 500,

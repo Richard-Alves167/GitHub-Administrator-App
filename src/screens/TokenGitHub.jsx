@@ -49,7 +49,7 @@ export default function TokenGitHub({ navigation }) {
                     </View>
                 </View>
             </View>
-            <View>
+            <View style={styles.intructionsContainer}>
                 <Text style={styles.textListTitle}>Para obter um token do GitHub</Text>
                 <View style={styles.intructions}>
                     <Text style={styles.textList}>1. Acesse sua conta do GitHub e vá para as configurações.</Text>
@@ -119,6 +119,11 @@ const styles = StyleSheet.create({
         marginTop: 10,
         gap: 20,
         alignItems: 'center',
+    },
+    intructionsContainer: {
+        width: '100%',
+        maxWidth: 400,
+        justifyContent: 'end',
     },
     intructions: {
         width: '100%',
