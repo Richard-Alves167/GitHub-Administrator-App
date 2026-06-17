@@ -15,17 +15,19 @@ import { useWindowDimensions } from 'react-native';
 export default function User({ navigation }) {
     const { width, height } = useWindowDimensions();
     const isLandscape = width > height ? true : false;
-    const { data, updateUser } = useAuth();
-    const { carregarDadosGithub } = useGit();
-    const [imagem, setImagem] = data?.user?.telefone || "";
-    const [nome, setNome] = data?.user?.nome || "";
-    const [biografy, setBiografy] = data?.user?.telefone || "";
-    const [followers, setFollowers] = data?.user?.telefone || "";
-    const [following, setFollowing] = data?.user?.telefone || "";
-    const [location, setLocation] = data?.user?.telefone || "";
-    const [email, setEmail] = data?.user?.email || "";
-    const [telefone, setTelefone] = data?.user?.telefone || "";
-    const [company, setCompany] = data?.user?.telefone || "";
+    const { data, logout } = useAuth();
+    const { usuarioGithub } = useGit();
+
+    const imagem = usuarioGithub?.avatar_url || "https://img.icons8.com/ios_filled/512/40C057/github.png";
+    const nome = usuarioGithub?.name || usuarioGithub?.login || data?.user?.nome || "";
+    const biografy = usuarioGithub?.bio || "Sem Biografia";
+    const followers = usuarioGithub?.followers ?? 0;
+    const following = usuarioGithub?.following ?? 0;
+    const location = usuarioGithub?.location || "Não informado";
+    const email = usuarioGithub?.email || data?.user?.email || "Não informado";
+    const telefone = data?.user?.telefone || "Não informado";
+    const company = usuarioGithub?.company || "Não informado";
+    const border = data?.user?.border || 1;
 
     function borderStyle(chooseStyle) {
         let imageLink = ''
@@ -43,16 +45,6 @@ export default function User({ navigation }) {
         return imageLink;
     }
 
-    async function save() {
-        if (!nome.trim() || !telefone.trim() || !email.trim()) {
-            alert("Preencha todos os campos para salvar as alterações!")
-            return;
-        }
-        updateUser(nome, telefone, email);
-        await carregarDadosGithub(token);
-        alert("Alterações salvas com sucesso!")
-    }
-
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.title}>Perfil</Text>
@@ -64,18 +56,18 @@ export default function User({ navigation }) {
                 <View>
                     <View style={styles.userInformation}>
                         <View style={styles.userImage}>
-                            <Image style={styles.logoBorder} source={borderStyle(1)} />
-                            <Image style={styles.logo} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMFrNpgzBaXy8MRx5eD-CmQiqlzxg0uMfwcJtln9xqDFvUp1LY7bzYgsWa&s=10' }} />
+                            <Image style={styles.logoBorder} source={borderStyle(border)} />
+                            <Image style={styles.logo} source={{ uri: imagem }} />
                         </View>
                         <Text style={styles.userName}>{nome}</Text>
                         <Text style={styles.userBiografy}>{biografy}</Text>
                         <View style={styles.stats}>
                             <View style={styles.stat}>
-                                <Text style={styles.statNumber}>{followers}</Text>
+                                <Text style={styles.statNumber}>{following}</Text>
                                 <Text style={styles.statText}>Seguindo</Text>
                             </View>
                             <View style={styles.stat}>
-                                <Text style={styles.statNumber}>{following}</Text>
+                                <Text style={styles.statNumber}>{followers}</Text>
                                 <Text style={styles.statText}>Seguidores</Text>
                             </View>
                         </View>
@@ -85,6 +77,7 @@ export default function User({ navigation }) {
                             icon={<MaterialCommunityIcons name="city" size={24} color={ColorTypes.TEXT_TITLE} />}
                             value={location}
                         />
+                        <ButtonComponent logout={true} function={logout} navigation={navigation} />
                     </View>
                 </View>
                 <View style={styles.moreInformationsUser}>
@@ -126,7 +119,7 @@ const styles = StyleSheet.create({
     },
     userInformation: {
         width: '100%',
-        maxWidth: 400,
+        maxWidth: 350,
         backgroundColor: ColorTypes.DARK,
         padding: 30,
         borderRadius: 20,
@@ -165,7 +158,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     userBiografy: {
-        fontSize: 20,
+        fontSize: 16,
         fontWeight: 'bold',
         color: ColorTypes.TEXT_TITLE,
         textAlign: 'center',
@@ -219,7 +212,7 @@ const styles = StyleSheet.create({
     },
     moreInformationsUser: {
         width: '100%',
-        maxWidth: 400,
+        maxWidth: 350,
         backgroundColor: ColorTypes.DARK,
         padding: 30,
         borderRadius: 20,

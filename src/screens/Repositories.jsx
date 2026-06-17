@@ -22,18 +22,17 @@ export default function Repositorios({ navigation }) {
     const [filtro, setFiltro] = useState('Todos');
 
     async function carregarMais() {
+        if (repositorios.length >= total) return;
         if (loadingRef.current) return;
         loadingRef.current = true;
-        pageRef.current += 1;
-        await carregarRepositorios(token, pageRef.current);
-        loadingRef.current = false;
-    }
-
-    async function onRefresh() {
         setRefreshing(true);
-        pageRef.current = 1;
-        await carregarRepositorios(token, 1);
-        setRefreshing(false);
+        try {
+            pageRef.current += 1;
+            await carregarRepositorios(token, pageRef.current);
+        } finally {
+            loadingRef.current = false;
+            setRefreshing(false);
+        }
     }
 
     const sorted = [...repositorios].filter(repo => {
@@ -48,7 +47,6 @@ export default function Repositorios({ navigation }) {
 
     return (
         <View style={{ backgroundColor: ColorTypes.BACKGROUND, flex: 1 }}>
-            {refreshing && <ViewLoading />}
             <View style={styles.progressContainer}>
                 <View style={styles.progressLinha}>
                     <Text style={styles.progressTitulo}>Repositórios</Text>
@@ -84,8 +82,6 @@ export default function Repositorios({ navigation }) {
                 keyExtractor={(repo) => String(repo.id)}
                 onEndReached={carregarMais}
                 onEndReachedThreshold={0.1}
-                refreshing={refreshing}
-                onRefresh={onRefresh}
                 renderItem={({ item: repo }) => (
                     <CardRepository repository={repo} navigation={navigation}></CardRepository>
                 )}
@@ -93,6 +89,7 @@ export default function Repositorios({ navigation }) {
                     <ViewWithoutItens></ViewWithoutItens>
                 }
             />
+            {refreshing && <ViewLoading></ViewLoading>}
         </View>
     );
 }
