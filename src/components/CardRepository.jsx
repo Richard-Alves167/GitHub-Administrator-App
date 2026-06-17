@@ -4,8 +4,8 @@ import Routes from '../Routes/index';
 import Fontisto from '@expo/vector-icons/Fontisto';
 import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
 
-export default function CardRepository({ repo }) {
-  const icon = repo.private ? "locked" : "unlocked";
+export default function CardRepository({ repository, navigation }) {
+  const icon = repository.private ? "locked" : "unlocked";
   function renderSwipeAction() {
     return (
       <View style={styles.swipeAction}>
@@ -18,17 +18,17 @@ export default function CardRepository({ repo }) {
     <GestureHandlerRootView>
       <Swipeable
         renderRightActions={renderSwipeAction}
-        onSwipeableOpen={() => navigation.navigate(Routes.REPO, { repo })}>
-        <Pressable onPress={() => navigation.navigate(Routes.REPO, { repo })} style={styles.RepositoryContainer}>
+        onSwipeableOpen={() => navigation.navigate(Routes.REPOSITORY, { repository })}>
+        <Pressable onPress={() => navigation.navigate(Routes.REPOSITORY, { repository })} style={styles.RepositoryContainer}>
           <View style={styles.RepositoryLeft}>
             <View style={styles.RepositorysitoryHeader}>
-              <Text style={styles.RepositoryName}>{repo.name}</Text>
+              <Text style={styles.RepositoryName}>{repository.name}</Text>
               <Fontisto name={icon} size={24} color={ColorTypes.TEXT_TITLE} />
             </View>
-            <Text style={styles.RepositoryDesc} numberOfLines={2}>{repo.description}</Text>
+            <Text style={styles.RepositoryDesc} numberOfLines={2}>{repository.description}</Text>
             <View style={styles.RepositoryMeta}>
               <Text style={styles.RepositoryBadge}>
-                {repo.private ? 'Privado' : 'Público'}
+                {repository.private ? 'Privado' : 'Público'}
               </Text>
             </View>
           </View>

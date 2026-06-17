@@ -1,7 +1,6 @@
 import { StyleSheet, View, Text, ImageBackground, Image, FlatList, Pressable } from 'react-native';
 import Routes from '../Routes/index';
 import ColorTypes from '../assets/ColorTypes';
-import ArrowBack from '../components/ArrowBackPage';
 import ViewNoGitHubToken from '../components/ViewNoGitHubToken';
 import CardRepository from '../components/CardRepository';
 import * as Progress from 'react-native-progress';
@@ -18,7 +17,7 @@ export default function Repositorios({ navigation }) {
     const carregados = repositorios.length;
     const porcentagem = total > 0 ? Math.min(Math.round((carregados / total) * 100), 100) : 0;
     const [ordenacao, setOrdenacao] = useState('asc');
-    const [filtro, setFiltro] = useState('todos');
+    const [filtro, setFiltro] = useState('Todos');
 
     async function carregarMais() {
         if (loadingRef.current) return;
@@ -36,8 +35,8 @@ export default function Repositorios({ navigation }) {
     }
 
     const sorted = [...repositorios].filter(repo => {
-        if (filtro === 'publico') return !repo.private;
-        if (filtro === 'privado') return repo.private;
+        if (filtro === 'Público') return !repo.private;
+        if (filtro === 'Privado') return repo.private;
         return true;
     }).sort((a, b) => ordenacao === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
 
@@ -47,17 +46,17 @@ export default function Repositorios({ navigation }) {
     return (
         <View style={{ backgroundColor: ColorTypes.BACKGROUND, flex: 1 }}>
 
-            <View style={styles.ProgressContainer}>
-                <View style={styles.ProgressLinha}>
-                    <Text style={styles.ProgressTitulo}>Repositórios</Text>
-                    <Text style={styles.ProgressPercentagem}>{porcentagem}%</Text>
+            <View style={styles.progressContainer}>
+                <View style={styles.progressLinha}>
+                    <Text style={styles.progressTitulo}>Repositórios</Text>
+                    <Text style={styles.progressPercentagem}>{porcentagem}%</Text>
                 </View>
                 <Progress.Bar progress={porcentagem / 100} width={null} color={ColorTypes.LIMONGREEN} unfilledColor={ColorTypes.WHITE} animated={true} borderWidth={0} height={3} />
             </View>
 
             <View style={styles.filtros}>
                 <View style={styles.filtroGrupo}>
-                    {['todos', 'publico', 'privado'].map(opcao => (
+                    {['Todos', 'Público', 'Privado'].map(opcao => (
                         <Pressable key={opcao} onPress={() => setFiltro(opcao)} style={[styles.filtroBotao, filtro === opcao && styles.filtroBotaoAtivo]}>
                             <Text style={[styles.filtroTexto, filtro === opcao && styles.filtroTextoAtivo]}>
                                 {opcao}
@@ -85,40 +84,34 @@ export default function Repositorios({ navigation }) {
                 refreshing={refreshing}
                 onRefresh={onRefresh}
                 renderItem={({ item: repo }) => (
-                    <CardRepository repo={repo} navigation={navigation}></CardRepository>
+                    <CardRepository repository={repo} navigation={navigation}></CardRepository>
                 )}
+                ListEmptyComponent={
+                    <View style={styles.emptyContainer}>
+                        <Text style={styles.emptyText}>Nenhum item encontrado.</Text>
+                    </View>
+                }
             />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    Arrow: {
-        fontSize: 18,
-        color: ColorTypes.TEXT_TITLE,
-        marginTop: 2,
-    },
-    NoRepos: {
-        textAlign: 'center',
-        fontSize: 16,
-        marginTop: 40,
-        color: '#888',
-    },
-    ProgressContainer: {
+    progressContainer: {
         paddingHorizontal: 16,
         paddingVertical: 14,
     },
-    ProgressLinha: {
+    progressLinha: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'baseline',
         marginBottom: 8,
     },
-    ProgressTitulo: {
+    progressTitulo: {
         fontSize: 24,
         color: ColorTypes.LIMONGREEN,
     },
-    ProgressPercentagem: {
+    progressPercentagem: {
         fontSize: 13,
         fontWeight: '500',
         color: ColorTypes.LIMONGREEN,
@@ -146,10 +139,22 @@ const styles = StyleSheet.create({
         borderColor: ColorTypes.GREEN,
     },
     filtroTexto: {
-        fontSize: 12,
+        fontSize: 14,
+        fontWeight: '500',
         color: ColorTypes.BACKGROUND_BUTTON,
     },
     filtroTextoAtivo: {
         color: ColorTypes.WHITE,
     },
+    emptyContainer: {
+        flex: 1,
+        marginTop: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    emptyText: {
+        fontSize: 20,
+        fontWeight: '500',
+        color: ColorTypes.TEXT_TITLE,
+    },    
 });

@@ -4,6 +4,7 @@ import DrawerNavigator from './DrawerNavigator';
 import SignInScreen from '../screens/SignIn';
 import SignUpScreen from '../screens/SignUp';
 import UserScreen from '../screens/User';
+import RepositoryScreen from '../screens/Repository';
 import HomeScreen from '../screens/Home';
 import Dashboard from './DashboardNavigator';
 
@@ -41,6 +42,13 @@ export default function StackNavigation() {
             <Stack.Screen
                 name={Routes.USER}
                 component={UserScreen}
+                options={{
+                    headerShown: false
+                }}
+            />
+            <Stack.Screen
+                name={Routes.REPOSITORY}
+                component={RepositoryScreen}
                 options={{
                     headerShown: false
                 }}

@@ -5,6 +5,7 @@ const Routes = {
         SIGNUP: 'SignUp',
         HOME: 'Home',
         REPOSITORIES: 'Repositories',
+        REPOSITORY: 'Repository',
         ISSUES: 'Issues',
         USER: 'Perfil',
     }
