@@ -3,6 +3,8 @@ import Routes from '../Routes/index';
 import ColorTypes from '../assets/ColorTypes';
 import ViewNoGitHubToken from '../components/ViewNoGitHubToken';
 import CardRepository from '../components/CardRepository';
+import ViewWithoutItens from '../components/ViewWithoutItens';
+import ViewLoading from '../components/ViewLoading';
 import * as Progress from 'react-native-progress';
 import { useNavigation } from '@react-navigation/native';
 import { useGit } from "../providers/GitContext";
@@ -43,9 +45,10 @@ export default function Repositorios({ navigation }) {
     if (usuarioGithub === null) {
         return <ViewNoGitHubToken></ViewNoGitHubToken>
     }
+
     return (
         <View style={{ backgroundColor: ColorTypes.BACKGROUND, flex: 1 }}>
-
+            {refreshing && <ViewLoading />}
             <View style={styles.progressContainer}>
                 <View style={styles.progressLinha}>
                     <Text style={styles.progressTitulo}>Repositórios</Text>
@@ -87,9 +90,7 @@ export default function Repositorios({ navigation }) {
                     <CardRepository repository={repo} navigation={navigation}></CardRepository>
                 )}
                 ListEmptyComponent={
-                    <View style={styles.emptyContainer}>
-                        <Text style={styles.emptyText}>Nenhum item encontrado.</Text>
-                    </View>
+                    <ViewWithoutItens></ViewWithoutItens>
                 }
             />
         </View>
@@ -146,15 +147,4 @@ const styles = StyleSheet.create({
     filtroTextoAtivo: {
         color: ColorTypes.WHITE,
     },
-    emptyContainer: {
-        flex: 1,
-        marginTop: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    emptyText: {
-        fontSize: 20,
-        fontWeight: '500',
-        color: ColorTypes.TEXT_TITLE,
-    },    
 });

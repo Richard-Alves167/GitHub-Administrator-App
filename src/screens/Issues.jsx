@@ -2,6 +2,7 @@ import { StyleSheet, View, Text, FlatList, Pressable } from "react-native";
 import ColorTypes from '../assets/ColorTypes';
 import ViewNoGitHubToken from '../components/ViewNoGitHubToken';
 import CardIssue from '../components/CardIssue';
+import ViewWithoutItens from '../components/ViewWithoutItens';
 import { useGit } from "../providers/GitContext";
 import { useState } from "react";
 import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -17,7 +18,7 @@ export default function Issues() {
         return true;
     }).sort((a, b) => ordenacao === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title));
 
-    
+
 
     if (usuarioGithub === null) {
         return (
@@ -70,6 +71,9 @@ export default function Issues() {
                     renderItem={({ item: issue }) => (
                         <CardIssue issue={issue} atualizarStatusIssue={atualizarStatusIssue} />
                     )}
+                    ListEmptyComponent={
+                        <ViewWithoutItens></ViewWithoutItens>
+                    }
                 />
             </View>
         </GestureHandlerRootView>
