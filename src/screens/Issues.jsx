@@ -5,20 +5,18 @@ import CardIssue from '../components/CardIssue';
 import ViewWithoutItens from '../components/ViewWithoutItens';
 import { useGit } from "../providers/GitContext";
 import { useState } from "react";
-import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function Issues() {
     const { issues, atualizarStatusIssue, usuarioGithub } = useGit();
-    const [filtro, setFiltro] = useState('todos');
+    const [filtro, setFiltro] = useState('Todos');
     const [ordenacao, setOrdenacao] = useState('asc');
 
     const filtered = [...issues].filter(issue => {
-        if (filtro === 'aberta') return issue.state === 'open';
-        if (filtro === 'fechada') return issue.state === 'closed';
+        if (filtro === 'Aberta') return issue.state === 'open';
+        if (filtro === 'Fechada') return issue.state === 'closed';
         return true;
     }).sort((a, b) => ordenacao === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title));
-
-
 
     if (usuarioGithub === null) {
         return (
@@ -26,56 +24,57 @@ export default function Issues() {
         );
     }
 
+    const listHeader = (
+        <>
+            <View style={styles.ProgressContainer}>
+                <View style={styles.ProgressLinha}>
+                    <Text style={styles.ProgressTitulo}>Issues</Text>
+                </View>
+            </View>
+            <View style={styles.filtros}>
+                <View style={styles.filtroGrupo}>
+                    {['Todos', 'Aberta', 'Fechada'].map(op => (
+                        <Pressable
+                            key={op}
+                            onPress={() => setFiltro(op)}
+                            style={[styles.filtroBotao, filtro === op && styles.filtroBotaoAtivo]}
+                        >
+                            <Text style={[styles.filtroTexto, filtro === op && styles.filtroTextoAtivo]}>
+                                {op}
+                            </Text>
+                        </Pressable>
+                    ))}
+                </View>
+
+                <View style={styles.filtroGrupo}>
+                    {['asc', 'desc'].map(op => (
+                        <Pressable
+                            key={op}
+                            onPress={() => setOrdenacao(op)}
+                            style={[styles.filtroBotao, ordenacao === op && styles.filtroBotaoAtivo]}
+                        >
+                            <Text style={[styles.filtroTexto, ordenacao === op && styles.filtroTextoAtivo]}>
+                                {op === 'asc' ? 'Asc' : 'Desc'}
+                            </Text>
+                        </Pressable>
+                    ))}
+                </View>
+            </View>
+        </>
+    );
+
     return (
         <GestureHandlerRootView style={{ backgroundColor: ColorTypes.BACKGROUND, flex: 1 }}>
-            <View style={{ flex: 1 }}>
-                <View style={styles.ProgressContainer}>
-                    <View style={styles.ProgressLinha}>
-                        <Text style={styles.ProgressTitulo}>Issues</Text>
-                    </View>
-                </View>
-                <View style={styles.filtros}>
-                    <View style={styles.filtroGrupo}>
-                        {['todos', 'aberta', 'fechada'].map(op => (
-                            <Pressable
-                                key={op}
-                                onPress={() => setFiltro(op)}
-                                style={[styles.filtroBotao, filtro === op && styles.filtroBotaoAtivo]}
-                            >
-                                <Text style={[styles.filtroTexto, filtro === op && styles.filtroTextoAtivo]}>
-                                    {op}
-                                </Text>
-                            </Pressable>
-                        ))}
-                    </View>
-
-                    <View style={styles.filtroGrupo}>
-                        {['asc', 'desc'].map(op => (
-                            <Pressable
-                                key={op}
-                                onPress={() => setOrdenacao(op)}
-                                style={[styles.filtroBotao, ordenacao === op && styles.filtroBotaoAtivo]}
-                            >
-                                <Text style={[styles.filtroTexto, ordenacao === op && styles.filtroTextoAtivo]}>
-                                    {op === 'asc' ? 'A-Z' : 'Z-A'}
-                                </Text>
-                            </Pressable>
-                        ))}
-                    </View>
-                </View>
-
-                <FlatList
-                    data={filtered}
-                    keyExtractor={(issue) => String(issue.id)}
-                    ListEmptyComponent={<Text style={styles.vazio}>Nenhuma issue encontrada.</Text>}
-                    renderItem={({ item: issue }) => (
-                        <CardIssue issue={issue} atualizarStatusIssue={atualizarStatusIssue} />
-                    )}
-                    ListEmptyComponent={
-                        <ViewWithoutItens></ViewWithoutItens>
-                    }
-                />
-            </View>
+            <FlatList
+                data={filtered}
+                extraData={issues}
+                keyExtractor={(issue) => `${issue.id}-${issue.state}`}
+                ListHeaderComponent={listHeader}
+                renderItem={({ item: issue }) => (
+                    <CardIssue issue={issue} atualizarStatusIssue={atualizarStatusIssue} />
+                )}
+                ListEmptyComponent={<ViewWithoutItens />}
+            />
         </GestureHandlerRootView>
     );
 }
@@ -111,15 +110,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         borderRadius: 20,
         borderWidth: 0.5,
-        borderColor: '#e5e5e5',
+        borderColor: ColorTypes.BACKGROUND_BUTTON,
+        backgroundColor: ColorTypes.GRAY,
     },
     filtroBotaoAtivo: {
         backgroundColor: ColorTypes.SECONDARY_GREEN,
         borderColor: ColorTypes.GREEN
     },
     filtroTexto: {
-        fontSize: 12,
-        color: ColorTypes.BACKGROUND_BUTTON
+        fontSize: 14,
+        fontWeight: '500',
+        color: ColorTypes.BACKGROUND_BUTTON,
     },
     filtroTextoAtivo: {
         color: ColorTypes.WHITE

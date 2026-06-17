@@ -2,45 +2,55 @@ import { StyleSheet, Text, View, Pressable } from 'react-native';
 import ColorTypes from '../assets/ColorTypes';
 import Routes from '../Routes/index';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useRef } from 'react';
 import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function CardRepository({ issue, atualizarStatusIssue }) {
     const icon = issue.state === 'open' ? "folder-open" : "folder";
+    const swipeableRef = useRef(null);
 
-    function renderSwipeEsquerda(issue) {
+    function renderSwipeLeft() {
         return (
-            <Pressable
-                style={[styles.swipe, { backgroundColor: ColorTypes.PRIMARY_GREEN }]}
-                onPress={() => atualizarStatusIssue(issue, 'open')}
-            >
+            <Pressable style={[styles.swipeAction, { backgroundColor: ColorTypes.PRIMARY_GREEN }]}>
                 <Text style={styles.swipeTexto}>Abrir</Text>
+                <AntDesign name="folder-open" size={24} color={ColorTypes.TEXT_TITLE} />
             </Pressable>
         );
     }
 
-    function renderSwipeDireita(issue) {
+    function renderSwipeRight() {
         return (
-            <Pressable
-                style={[styles.swipe, { backgroundColor: ColorTypes.DARK }]}
-                onPress={() => atualizarStatusIssue(issue, 'closed')}
-            >
+            <Pressable style={[styles.swipeAction, { backgroundColor: ColorTypes.DARK }]}>
                 <Text style={styles.swipeTexto}>Fechar</Text>
+                <AntDesign name="folder" size={24} color={ColorTypes.TEXT_TITLE} />
             </Pressable>
         );
+    }
+
+    async function handleSwipe(direction) {
+        try {
+            if (direction === 'left') {
+                await atualizarStatusIssue(issue, 'open');
+            } else {
+                await atualizarStatusIssue(issue, 'closed');
+            }
+        } finally {
+            swipeableRef.current?.close();
+        }
     }
 
     return (
         <GestureHandlerRootView>
-            <Swipeable renderLeftActions={() => renderSwipeEsquerda(issue)} renderRightActions={() => renderSwipeDireita(issue)}>
+            <Swipeable ref={swipeableRef} renderLeftActions={() => renderSwipeLeft()} renderRightActions={() => renderSwipeRight()} onSwipeableOpen={handleSwipe}>
                 <View style={styles.card}>
-                    <View style={styles.IssueLeft}>
-                        <View style={styles.IssueHeader}>
-                            <Text style={styles.IssueName}>{issue.title}</Text>
-                            <AntDesign name="folder-open" size={24} color={ColorTypes.TEXT_TITLE} />
+                    <View style={styles.issueLeft}>
+                        <View style={styles.issueHeader}>
+                            <Text style={styles.issueName}>{issue.title}</Text>
+                            <AntDesign name={icon} size={24} color={ColorTypes.TEXT_TITLE} />
                         </View>
-                        <Text style={styles.IssueDesc}>{issue.repository?.full_name}</Text>
+                        <Text style={styles.issueDesc}>{issue.repository?.full_name}</Text>
                     </View>
-                    <Text style={styles.IssueBadge}>
+                    <Text style={styles.issueBadge}>
                         {issue.state === 'open' ? 'Aberta' : 'Fechada'}
                     </Text>
                 </View>
@@ -59,36 +69,36 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         marginBottom: 15,
         justifyContent: 'space-between',
-        alignItems: 'flex-start',
+
     },
-    IssueLeft: {
-        flex: 1,
+    issueLeft: {
         gap: 4,
     },
-    IssueHeader: {
-        flex: 1,
+    issueHeader: {
         flexDirection: 'row',
         alignItems: "center",
         justifyContent: "space-between",
         marginBottom: 10,
     },
-    IssueName: {
+    issueName: {
         fontSize: 18,
         fontWeight: '500',
         color: ColorTypes.TEXT_TITLE,
     },
-    IssueDesc: {
+    issueDesc: {
         fontSize: 14,
         color: ColorTypes.GREEN,
         marginBottom: 10,
     },
-    IssueMeta: {
+    issueMeta: {
         flexDirection: 'row',
         alignItems: 'center',
         gap: 10,
         marginTop: 4,
     },
-    IssueBadge: {
+    issueBadge: {
+        width: 60,
+        textAlign: 'center',
         fontSize: 11,
         paddingVertical: 2,
         paddingHorizontal: 8,
@@ -99,7 +109,6 @@ const styles = StyleSheet.create({
         fontWeight: '500',
     },
     swipeAction: {
-        backgroundColor: ColorTypes.GREEN,
         justifyContent: 'center',
         alignItems: 'center',
         width: 120,

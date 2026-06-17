@@ -133,7 +133,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         borderRadius: 20,
         borderWidth: 0.5,
-        borderColor: '#e5e5e5',
+        borderColor: ColorTypes.BACKGROUND_BUTTON,
+        backgroundColor: ColorTypes.GRAY,
     },
     filtroBotaoAtivo: {
         backgroundColor: ColorTypes.SECONDARY_GREEN,

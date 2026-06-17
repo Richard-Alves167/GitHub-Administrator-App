@@ -19,15 +19,15 @@ export default function CardRepository({ repository, navigation }) {
       <Swipeable
         renderRightActions={renderSwipeAction}
         onSwipeableOpen={() => navigation.navigate(Routes.REPOSITORY, { repository })}>
-        <Pressable onPress={() => navigation.navigate(Routes.REPOSITORY, { repository })} style={styles.RepositoryContainer}>
-          <View style={styles.RepositoryLeft}>
-            <View style={styles.RepositorysitoryHeader}>
-              <Text style={styles.RepositoryName}>{repository.name}</Text>
+        <Pressable onPress={() => navigation.navigate(Routes.REPOSITORY, { repository })} style={styles.repositoryContainer}>
+          <View style={styles.repositoryLeft}>
+            <View style={styles.repositoryHeader}>
+              <Text style={styles.repositoryName}>{repository.name}</Text>
               <Fontisto name={icon} size={24} color={ColorTypes.TEXT_TITLE} />
             </View>
-            <Text style={styles.RepositoryDesc} numberOfLines={2}>{repository.description}</Text>
-            <View style={styles.RepositoryMeta}>
-              <Text style={styles.RepositoryBadge}>
+            <Text style={styles.repositoryDesc} numberOfLines={2}>{repository.description}</Text>
+            <View style={styles.repositoryMeta}>
+              <Text style={styles.repositoryBadge}>
                 {repository.private ? 'Privado' : 'Público'}
               </Text>
             </View>
@@ -39,7 +39,7 @@ export default function CardRepository({ repository, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  RepositoryContainer: {
+  repositoryContainer: {
     backgroundColor: ColorTypes.GRAY,
     borderWidth: 0.5,
     borderColor: ColorTypes.LIMONGREEN,
@@ -51,33 +51,33 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
   },
-  RepositoryLeft: {
+  repositoryLeft: {
     flex: 1,
     gap: 4,
   },
-  RepositorysitoryHeader: {
+  repositoryHeader: {
     flexDirection: 'row',
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 10,
   },
-  RepositoryName: {
+  repositoryName: {
     fontSize: 18,
     fontWeight: '500',
     color: ColorTypes.TEXT_TITLE,
   },
-  RepositoryDesc: {
+  repositoryDesc: {
     fontSize: 14,
     color: ColorTypes.GREEN,
     marginBottom: 10,
   },
-  RepositoryMeta: {
+  repositoryMeta: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
     marginTop: 4,
   },
-  RepositoryBadge: {
+  repositoryBadge: {
     fontSize: 11,
     paddingVertical: 2,
     paddingHorizontal: 8,

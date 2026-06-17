@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useRef } from 'react';
 import { buscarUsuarioGithub, buscarRepositoriosGithub, buscarIssuesGithub, atualizarStatusIssue } from '../services/githubService';
 
 const GitContext = createContext(null);
@@ -28,6 +28,24 @@ function gitReducer(valores, action) {
             return { ...valores, repositorios: action.payload.page === 1 ? action.payload.repositorios : [...valores.repositorios, ...action.payload.repositorios] };
         case "set_issues":
             return { ...valores, issues: action.payload };
+        case "update_issue_status":
+            return {
+                ...valores,
+                issues: valores.issues.map((item) =>
+                    item.id === action.payload.issueId
+                        ? { ...item, state: action.payload.status }
+                        : item
+                ),
+            };
+        case "update_issue":
+            return {
+                ...valores,
+                issues: valores.issues.map((item) =>
+                    item.id === action.payload.issueId
+                        ? action.payload.issue
+                        : item
+                ),
+            };
         default:
             return valores;
     }
@@ -35,6 +53,7 @@ function gitReducer(valores, action) {
 
 export default function GitProvider({ children }) {
     const [valores, dispatch] = useReducer(gitReducer, valoresIniciais);
+    const issuesFetchIdRef = useRef(0);
 
     function handleSetToken(token) {
         dispatch({ type: "set_token", payload: token });
@@ -64,7 +83,10 @@ export default function GitProvider({ children }) {
     }
 
     async function carregarIssues(token) {
+        const fetchId = ++issuesFetchIdRef.current;
         const data = await buscarIssuesGithub(token);
+
+        if (fetchId !== issuesFetchIdRef.current) return;
 
         dispatch({
             type: "set_issues",
@@ -73,13 +95,29 @@ export default function GitProvider({ children }) {
     }
 
     async function handleAtualizarStatus(issue, novoStatus) {
-        await atualizarStatusIssue(
-            issue,
-            novoStatus,
-            valores.token
-        );
+        const statusAnterior = issue.state;
 
-        await carregarIssues(valores.token);
+        dispatch({
+            type: "update_issue_status",
+            payload: { issueId: issue.id, status: novoStatus },
+        });
+
+        const issueAtualizada = await atualizarStatusIssue(issue, novoStatus, valores.token);
+
+        if (issueAtualizada?.id) {
+            dispatch({
+                type: "update_issue",
+                payload: {
+                    issueId: issue.id,
+                    issue: { ...issue, ...issueAtualizada, repository: issue.repository },
+                },
+            });
+        } else {
+            dispatch({
+                type: "update_issue_status",
+                payload: { issueId: issue.id, status: statusAnterior },
+            });
+        }
     }
 
     async function carregarDadosGithub(userToken) {
