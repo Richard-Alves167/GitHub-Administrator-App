@@ -1,20 +1,20 @@
 export function getHeaders(userToken) {
-        return { Authorization: `Bearer ${userToken}`, Accept: "application/vnd.github+json", };
-    }
+    return { Authorization: `Bearer ${userToken}`, Accept: "application/vnd.github+json", };
+}
 
 export async function buscarUsuarioGithub(userToken) {
     try {
         const response = await fetch("https://api.github.com/user", { headers: getHeaders(userToken) });
 
         if (!response.ok) {
+            alert("Erro ao buscar usuário do GitHub. Verifique o Token e tente novamente.")
             throw new Error("Erro ao buscar usuário do GitHub");
         }
-
         const data = await response.json();
+        alert("Alterações salvas com sucesso!")
         return data;
-
     } catch (error) {
-        alert(error.message);
+        console.error(error.message);
         return null;
     }
 }
@@ -30,7 +30,7 @@ export async function buscarRepositoriosGithub(page = 1, userToken) {
         return data;
 
     } catch (error) {
-        alert(error.message);
+        console.error(error.message);
         return [];
     }
 }
@@ -44,7 +44,7 @@ export async function buscarIssuesGithub(userToken) {
         const data = await response.json();
         return data;
     } catch (error) {
-        alert(error.message);
+        console.error(error.message);
         return [];
     }
 }
@@ -59,15 +59,9 @@ export async function atualizarStatusIssue(issue, novoStatus, userToken) {
                 body: JSON.stringify({ state: novoStatus }),
             }
         );
-
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || 'Erro ao atualizar issue');
-        }
-
         return await response.json();
     } catch (error) {
-        alert(error.message);
-        return null;
+        console.error(error.message);
+        return [];
     }
 }

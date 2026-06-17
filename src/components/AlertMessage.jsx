@@ -1,7 +1,10 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
-import Feather from '@expo/vector-icons/Feather';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
-export default function AlertMessage({msg}) {
+export default function AlertMessage({msg, alertRed=true}) {
+    const icon = alertRed ? 'exclamation-circle' : 'check-circle'
+    const color = alertRed ? "red" : "green"
+
     function handleAppear() {
         if (msg == '' || msg == null) {
             return 'none';
@@ -10,8 +13,8 @@ export default function AlertMessage({msg}) {
     }
     return (
         <View style={styles.container}>
-            <Feather name="alert-circle" size={20} color="red" style={{ display: handleAppear() }} />
-            <Text style={[styles.mensagem, { display: handleAppear() }]}>{msg}</Text>
+            <AntDesign name={icon} size={20} color={color} style={{ display: handleAppear() }}/>
+            <Text style={[styles.mensagem, { color, display: handleAppear() }]}>{msg}</Text>
         </View>
     )
 }
@@ -23,8 +26,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     mensagem: {
-        fontSize: 12,
-        color: 'red',
+        fontSize: 16,
         textAlign: 'center',
         margin: 15
     }

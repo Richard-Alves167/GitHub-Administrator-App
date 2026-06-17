@@ -8,6 +8,7 @@ const Routes = {
         REPOSITORY: 'Repository',
         ISSUES: 'Issues',
         USER: 'Perfil',
+        TOKEN: 'Token',
     }
 
 export default Routes;
