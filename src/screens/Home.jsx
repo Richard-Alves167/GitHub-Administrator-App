@@ -7,9 +7,6 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
         <ArrowBack navigation={navigation}/>
-        <ImageBackground source={require('../assets/images/banner/coffeShopBackground.jpg')} style={styles.banner}>
-            <Text style={styles.text}>Bem Vindo ao Café completo com os gatos que fazem a sua alegria!</Text>
-        </ImageBackground>
     </View>
   )}
 
