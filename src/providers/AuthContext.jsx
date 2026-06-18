@@ -15,7 +15,7 @@ function authReducer(data, action) {
     switch(action.type) {
         case "set_user":
             return {...data, user: action.payload};
-        case "set_resgisteredUser":
+        case "set_registeredUser":
             return {...data, registeredUser: action.payload};
         default:
             return data;
@@ -25,27 +25,25 @@ function authReducer(data, action) {
 export default function AuthProvider({ children }) {
     const [data, dispatch] = useReducer(authReducer, initialData);
 
-    const register = (nome, telefone, email, password) => dispatch({
-        type: "set_resgisteredUser", payload: {nome, telefone, email, password}
+    const register = (nome, email, password) => {
+    console.log("Registrando:", { nome, email, password });
+
+    dispatch({
+        type: "set_registeredUser",
+        payload: { nome, email, password }
     });
+};
 
     const updateUser = (nome, telefone, email) => dispatch({
-        type: "set_user", payload: {nome, telefone, email}
+        type: "set_user", payload: {nome, email}
     });
 
-    /*const login = (email, password) => {
-        if (registeredUser && email === registeredUser.email && password === registeredUser.password) {
-            dispatch({type: "set_user", payload: { nome: registeredUser.nome, email: email, telefone: registeredUser.telefone }});
+    const login = (email, password) => {
+        if (data.registeredUser && email === data.registeredUser.email && password === data.registeredUser.password) {
+            dispatch({type: "set_user", payload: { nome: data.registeredUser.nome, email: email }});
             return true;
         }
 
-        return false;
-    };*/
-    const login = (email, password) => {
-        if (email === "r" && password === "1") {
-            dispatch({type: "set_user", payload: { nome: "Richard", email: email, telefone: "21998228013" }});
-            return true;
-        }
         return false;
     };
 

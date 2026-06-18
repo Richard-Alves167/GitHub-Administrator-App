@@ -22,7 +22,7 @@ export default function DashboardNavigator() {
                 headerShown: false,
                 tabBarStyle: {
                     backgroundColor: ColorTypes.PRIMARY_GREEN,
-                    height: 80,
+                    height: 120,
                     borderTopWidth: 0,
                     elevation: 0,
                     paddingBottom: 10,

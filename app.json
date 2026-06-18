@@ -20,7 +20,9 @@
         "foregroundImage": "./src/assets/images/logo/LogoGPVVerde.png",
         "backgroundColor": "#2e2e2e"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "permissions": [],
+      "package": "GitHub.App"
     },
     "web": {
       "favicon": "../assets/images/logo/LogoGPVVerde.png"
@@ -28,6 +30,11 @@
     "plugins": [
       "expo-video",
       "react-native-video"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "41db40c2-cc7f-45ff-983f-58784a40f15b"
+      }
+    }
   }
 }

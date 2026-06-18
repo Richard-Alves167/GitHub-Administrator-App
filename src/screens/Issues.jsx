@@ -64,7 +64,7 @@ export default function Issues() {
     );
 
     return (
-        <GestureHandlerRootView style={{ backgroundColor: ColorTypes.BACKGROUND, flex: 1 }}>
+        <GestureHandlerRootView style={{ backgroundColor: ColorTypes.BACKGROUND, flex: 1, paddingTop: 20, }}>
             <FlatList
                 data={filtered}
                 extraData={issues}

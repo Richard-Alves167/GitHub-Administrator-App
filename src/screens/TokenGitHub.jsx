@@ -42,11 +42,12 @@ export default function TokenGitHub({ navigation }) {
                     alignSelf: 'center',
                 }}>
                 <View>
-                    <Image style={styles.logo} source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg' }} />
+                    <Image style={styles.logo} source={require('../assets/images/logo/GitHubIcon.png')} />
                     <Text style={styles.title}>Token do GitHub</Text>
                     <View style={styles.form}>
                         <InputField
                             label="Token do GitHub"
+                            secure={true}
                             placeholder="XXXXXXXXXXXXXXXXXXXXXXX"
                             icon={<MaterialIcons name="vpn-key" size={24} color={ColorTypes.TEXT_TITLE} />}
                             onChangeText={setToken}

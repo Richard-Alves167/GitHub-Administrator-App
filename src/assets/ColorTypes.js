@@ -9,6 +9,7 @@ const ColorTypes = {
     DARK: "#0C1016",
     WHITE: "#FFFFFF",
     GRAY: "#141414", 
+    RED: "",
 };
 
 export default ColorTypes;

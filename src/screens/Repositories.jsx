@@ -22,7 +22,7 @@ export default function Repositorios({ navigation }) {
     const [filtro, setFiltro] = useState('Todos');
 
     async function carregarMais() {
-        if (repositorios.length >= total) return;
+        // if (repositorios.length >= total) return;
         if (loadingRef.current) return;
         loadingRef.current = true;
         setRefreshing(true);
@@ -46,7 +46,7 @@ export default function Repositorios({ navigation }) {
     }
 
     return (
-        <View style={{ backgroundColor: ColorTypes.BACKGROUND, flex: 1 }}>
+        <View style={{ backgroundColor: ColorTypes.BACKGROUND, flex: 1, paddingTop: 20, }}>
             <View style={styles.progressContainer}>
                 <View style={styles.progressLinha}>
                     <Text style={styles.progressTitulo}>Repositórios</Text>

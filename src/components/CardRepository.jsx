@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   repositoryName: {
+    width: '90%',
     fontSize: 18,
     fontWeight: '500',
     color: ColorTypes.TEXT_TITLE,
