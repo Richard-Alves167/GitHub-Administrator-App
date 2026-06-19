@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
         height: 30,
         flexDirection: 'row',
         alignItems: 'center',
+        alignSelf: 'center',
     },
     mensagem: {
         fontSize: 16,

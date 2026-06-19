@@ -218,8 +218,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderWidth: 1,
         borderColor: ColorTypes.LIMONGREEN,
-        marginTop: 20,
-        marginBottom: 60,
+        marginBottom: 80,
     },
     moreInformations: {
         gap: 10,

@@ -31,8 +31,7 @@ export default function SignUp({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <ArrowBack navigation={navigation} />
+    <ScrollView style={styles.container}>
       <View style={styles.inputContainer}>
         <Image style={styles.logo} source={require('../assets/images/logo/LogoGPVTextoVerde.png')} />
         <Text style={styles.title}>Cadastrar-se</Text>
@@ -68,17 +67,17 @@ export default function SignUp({ navigation }) {
         <ButtonComponent text="Cadastrar" function={handleRegister} />
         <Text style={styles.titleSignUp}>Já tem uma conta? <Text style={styles.link} onPress={() => navigation.navigate(Routes.SIGNIN)}>Faça Login</Text></Text>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 60,
+    paddingBottom: 60,
     flex: 1,
     gap: 10,
     backgroundColor: ColorTypes.BACKGROUND,
-    alignItems: 'center',
-    justifyContent: 'center',
     padding: 20,
   },
   inputContainer: {
@@ -106,6 +105,7 @@ const styles = StyleSheet.create({
     color: ColorTypes.TEXT_TITLE,
   },
   buttonContainer: {
+    marginTop: 10,
     gap: 20,
     alignItems: 'center',
   }
