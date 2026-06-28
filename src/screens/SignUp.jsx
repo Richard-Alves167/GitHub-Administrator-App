@@ -74,7 +74,6 @@ export default function SignUp({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 60,
-    paddingBottom: 60,
     flex: 1,
     gap: 10,
     backgroundColor: ColorTypes.BACKGROUND,
@@ -108,5 +107,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     gap: 20,
     alignItems: 'center',
+    marginBottom: 60,
   }
 });
